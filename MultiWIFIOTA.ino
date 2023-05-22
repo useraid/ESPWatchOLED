@@ -1,52 +1,68 @@
 /*
   useraid
   Base Boilerplate for ESP8266 with WiFiManager and OTA
-  For Serial Debugging uncomment //#// Lines
+  Debugging is ON by Default
 */
 
 #include <Arduino.h> // Arduino Core required for PlatformIO
 #include <ESP8266WiFi.h>
-#include <WiFiMulti.h>
-#include <ESPAsyncTCP.h>
-#include <ESPAsyncWebServer.h>
-#include <AsyncElegantOTA.h>
+#include <WiFiManager.h>
+#include <ArduinoOTA.h>
 
-WiFiMulti wm;
+WiFiManager wm;
 
-// Set WiFi timeout
-const uint32_t connectTimeoutMs = 5000
-
-AsyncWebServer server(80);
-
-void setup(void) {
+void setup() {
+  // Serial initialization for debugging
   Serial.begin(115200);
+
+  // WiFiManager Captive Portal Init
+  bool connection;
+  connection = wm.autoConnect("ESPWatchOLED","meowlol"); // Config AP
   
-  // Putting WiFi into STA mode to connect to an AP
-  WiFi.mode(WIFI_STA);
-
-  // Add WiFi networks
-  wm.addAP("EACCESS", "hostelnet");
-  wm.addAP("TU", "tu@inet1");
-  wm.addAP("LC", "lc@tiet1");
-
-  // Wait for WiFi connection
-  //#// Serial.println("Connecting Wifi...");
-  if(wm.run() == WL_CONNECTED) {
-    //#// Serial.println("IP address: ");
-    Serial.println(WiFi.localIP());
+  // Restart on Connection Failure
+  if(!connection) { 
+        Serial.println("Failed to connect"); 
+        ESP.restart();
+ 
   }
-
-  // Initialize Webserver at root
-  server.on("/", HTTP_GET, [](AsyncWebServerRequest *request) {
-    request->send(200, "text/plain", "This is the ESPWatchOLED Project.\nMore Information about this project can be found on my GitHub Page: https://github.com/useraid/ESPWatchOLED");
+  while (WiFi.status() != WL_CONNECTED) {
+      delay(500);
+      Serial.println("Wifi connecting...");
+  }
+  Serial.print("IP : ");
+  Serial.println(WiFi.localIP());
+  
+  // Serial Debug Parameters for OTA
+  ArduinoOTA.onStart([]() {
+    Serial.println("Start");
   });
 
-  // Start ElegantOTA
-  AsyncElegantOTA.begin(&server);
-  //#// server.begin();
-  //#// Serial.println("HTTP server started");
+  ArduinoOTA.onEnd([]() {
+    Serial.println("\nEnd");
+  });
+
+  ArduinoOTA.onProgress([](unsigned int progress, unsigned int total) {
+    Serial.printf("Progress: %u%%\r", (progress / (total / 100)));
+  });
+
+  ArduinoOTA.onError([](ota_error_t error) {
+    Serial.printf("Error[%u]: ", error);
+    if (error == OTA_AUTH_ERROR) Serial.println("Auth Failed");
+    else if (error == OTA_BEGIN_ERROR) Serial.println("Begin Failed");
+    else if (error == OTA_CONNECT_ERROR) Serial.println("Connect Failed");
+    else if (error == OTA_RECEIVE_ERROR) Serial.println("Receive Failed");
+    else if (error == OTA_END_ERROR) Serial.println("End Failed");
+  });
+
+  ArduinoOTA.begin();
+
+  // Init Setup Here
+
 }
 
-void loop(void) {
-    // Codebase
+void loop() {
+  ArduinoOTA.handle();
+
+  // Codebase Here
+
 }
