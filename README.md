@@ -14,6 +14,7 @@ ESP12F based NTP-sync Watch
 **Routed PCB Layers**
 
 ![PCB_PCB_ESPWatchOLED](https://github.com/useraid/ESPWatchOLED/assets/93074700/7d066b5f-e17a-463b-bb14-ff1017b00c68)
+![PCB_PCB_ESPWatchOLEDIMG](https://github.com/useraid/ESPWatchOLED/assets/93074700/8b2d7882-b4bd-42da-ad8b-c3db881437d3)
 
 ## Hardware
 
