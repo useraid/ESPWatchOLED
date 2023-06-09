@@ -3,7 +3,7 @@ ESP12F based NTP-sync Watch
 
 ### Contents
 - [Schematics](#schematics)
-- [Hardware](#hardware)
+- [Hardware (to be revised)](#hardware)
 - [Software](#software)
 - [Download Gerber Files for PCB](https://github.com/useraid/ESPWatchOLED/releases/)
 
@@ -23,6 +23,7 @@ ESP12F based NTP-sync Watch
 <img src="https://github.com/useraid/ESPWatchOLED/assets/93074700/ff764ece-8e84-445a-837d-7a4d2b41800e" width="200" height="200">
 
 ## Hardware
+***This Design is deprecated and a new design is being worked on***
 
 Watch can be made on a prototype board or using the PCB Gerber Files(You will need to source SMD Components for that though)
 
@@ -37,6 +38,7 @@ Watch can be made on a prototype board or using the PCB Gerber Files(You will ne
 *Note - Charging and battery circuit yet to be implemented. That will most likely be a TP4056 Charging Module with a 3.7V Lipo (probably 300 mAH)*
 
 ## Software
+***Due to the complex nature of the sofftware, it'll be spinned off into a new project UOS***
 
 The Code is written in Arduino IDE(WIP). The ESP8266 libraries need to be added using the board manager
 
