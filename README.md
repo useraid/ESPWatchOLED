@@ -38,7 +38,7 @@ Watch can be made on a prototype board or using the PCB Gerber Files(You will ne
 *Note - Charging and battery circuit yet to be implemented. That will most likely be a TP4056 Charging Module with a 3.7V Lipo (probably 300 mAH)*
 
 ## Software
-***Due to the complex nature of the sofftware, it'll be spinned off into a new project UOS***
+***Due to the complex nature of the software, it'll be spinned off into a new project [UOS](https://github.com/useraid/UOS)***
 
 The Code is written in Arduino IDE(WIP). The ESP8266 libraries need to be added using the board manager
 
