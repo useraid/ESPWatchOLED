@@ -3,7 +3,7 @@ ESP12F based NTP-sync Watch
 
 ### Contents
 - [Schematics](#schematics)
-- [Hardware (to be revised)](#hardware)
+- [Hardware](#hardware)
 - [Software](#software)
 - [Download Gerber Files for PCB](https://github.com/useraid/ESPWatchOLED/releases/)
 
